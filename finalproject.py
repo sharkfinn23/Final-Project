@@ -65,9 +65,6 @@ class Frogger(App):
     def D(self, event):
         self.frog.y += 20
     
-  #create car# 
-    def buildCar (self, event):
-        self.carsprite = Car(0, 400)
    #start game# 
     def go(self, event):
         Road(0,300)
@@ -77,7 +74,8 @@ class Frogger(App):
         
     #reset game#
     def reset(self, event):
-        self.carsprite.destroy
+        self.car.destroy()
+        self.frog.destroy()
         print('b')
         
     def step(self):
