@@ -47,8 +47,7 @@ class Frogger(App):
     def __init__(self, SCREEN_WIDTH, SCREEN_HEIGHT):
         super().__init__()
         self.listenKeyEvent('keydown', 's', self.go)
-        self.listenKeyEvent('keydown', 's', self.buildCar)
-        self.listenKeyEvent('keydown', 'f', self.car)
+        self.car = None
 
     def buildCar (self, event):
         self.carsprite = Car(0, 400)
@@ -57,9 +56,13 @@ class Frogger(App):
         Road(0,300)
         Water(0,50)
         Frog(400,600)
+        self.car=Car(0,400)
         
-    def car(self, event):
-        car.x += 1
+    def step(self):
+        if self.car:
+            self.car.x += 1
+            if self.car.x == 780:
+                self.car.x = 1
             
 
 
