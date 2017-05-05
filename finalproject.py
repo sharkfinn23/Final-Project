@@ -72,7 +72,7 @@ class Frogger(App):
         self.frog=Frog(400,600)
         self.car=Car(0,400)
     #restart without road and water again#
-    def go2(self, event):
+    def go2(self):
         self.frog=Frog(400,600)
         self.car=Car(0,400)
         
@@ -80,7 +80,6 @@ class Frogger(App):
     def reset(self):
         self.car.destroy()
         self.frog.destroy()
-
         self.go2()
         
         
