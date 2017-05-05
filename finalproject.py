@@ -75,14 +75,24 @@ class Frogger(App):
         self.frog=Frog(400,600)
         self.car=Car(0,400)
         
+    #reset game#
+    def reset(self, event):
+        self.carsprite.destroy
+        
     def step(self):
+        #makes car move#
         if self.car:
             self.car.x += 1
             if self.car.x == 780:
                 self.car.x = 1
+            #testing for impact with car#
             cardeath = self.frog.collidingWithSprites(Car)
             if cardeath:
+                print('a')
                 reset
+                print('a')
+                
+    
             
 
 
