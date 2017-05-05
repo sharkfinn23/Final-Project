@@ -53,7 +53,7 @@ class Frogger(App):
         self.listenKeyEvent('keydown', 'left arrow', self.L)
         self.listenKeyEvent('keydown', 'up arrow', self.U)
         self.listenKeyEvent('keydown', 'down arrow', self.D)
-        ##
+        #start with no car#
         self.car = None
 #Movement keys#
     def R(self, event):
@@ -65,10 +65,10 @@ class Frogger(App):
     def D(self, event):
         self.frog.y += 20
     
-    
+  #create car# 
     def buildCar (self, event):
         self.carsprite = Car(0, 400)
-    
+   #start game# 
     def go(self, event):
         Road(0,300)
         Water(0,50)
