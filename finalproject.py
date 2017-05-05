@@ -13,13 +13,14 @@ thinline = LineStyle(2, black)
 black = Color(0, 1)
 bg_asset = RectangleAsset(SCREEN_WIDTH, SCREEN_HEIGHT, thinline, green)
 bg = Sprite(bg_asset, (0,0))
-
+gravity = 0
 class Road(Sprite):
     road = RectangleAsset(800, 250, thinline, black)
     def __init__(self, x, y):
         super().__init__(Road.road, (x, y))
         self.x = x
         self.y = y
+        
 class Water(Sprite):
     water = RectangleAsset(800, 250, thinline, blue)
     def __init__(self, x, y):
@@ -33,6 +34,7 @@ class Car(Sprite):
         super().__init__(Car.car, (x, y))
         self.x = x
         self.y = y
+
         
 class Frog(Sprite):
     frog = RectangleAsset(15, 15, thinline, red)
@@ -44,16 +46,22 @@ class Frog(Sprite):
 class Frogger(App):
     def __init__(self, SCREEN_WIDTH, SCREEN_HEIGHT):
         super().__init__()
-        self.mousex = 0
-        self.mousey = 0
         self.listenKeyEvent('keydown', 's', self.go)
+        self.listenKeyEvent('keydown', 's', self.buildCar)
+        self.listenKeyEvent('keydown', 'f', self.car)
 
+    def buildCar (self, event):
+        self.carsprite = Car(0, 400)
+    
     def go(self, event):
         Road(0,300)
         Water(0,50)
         Frog(400,600)
-        Car(0,400)
-    def step(self):
-        pass
+        
+    def car(self, event):
+        car.x += 1
+            
+
+
 myapp = Frogger(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.run()
