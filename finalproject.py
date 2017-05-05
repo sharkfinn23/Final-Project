@@ -78,6 +78,7 @@ class Frogger(App):
     #reset game#
     def reset(self, event):
         self.carsprite.destroy
+        print('b')
         
     def step(self):
         #makes car move#
