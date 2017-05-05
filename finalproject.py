@@ -89,7 +89,7 @@ class Frogger(App):
             cardeath = self.frog.collidingWithSprites(Car)
             if cardeath:
                 print('a')
-                reset
+                self.reset
                 print('a')
                 
     
