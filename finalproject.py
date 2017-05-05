@@ -13,7 +13,7 @@ thinline = LineStyle(2, black)
 black = Color(0, 1)
 bg_asset = RectangleAsset(SCREEN_WIDTH, SCREEN_HEIGHT, thinline, green)
 bg = Sprite(bg_asset, (0,0))
-gravity = 0
+l = 3
 class Road(Sprite):
     road = RectangleAsset(800, 250, thinline, black)
     def __init__(self, x, y):
@@ -71,12 +71,18 @@ class Frogger(App):
         Water(0,50)
         self.frog=Frog(400,600)
         self.car=Car(0,400)
+    #restart without road and water again#
+    def go2(self, event):
+        self.frog=Frog(400,600)
+        self.car=Car(0,400)
         
     #reset game#
-    def reset(self, event):
+    def reset(self):
         self.car.destroy()
         self.frog.destroy()
-        print('b')
+
+        self.go2()
+        
         
     def step(self):
         #makes car move#
@@ -87,9 +93,8 @@ class Frogger(App):
             #testing for impact with car#
             cardeath = self.frog.collidingWithSprites(Car)
             if cardeath:
-                print('a')
-                self.reset
-                print('a')
+                self.reset()
+
                 
     
             
