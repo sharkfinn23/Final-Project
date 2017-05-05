@@ -46,16 +46,33 @@ class Frog(Sprite):
 class Frogger(App):
     def __init__(self, SCREEN_WIDTH, SCREEN_HEIGHT):
         super().__init__()
+        #start#
         self.listenKeyEvent('keydown', 's', self.go)
+        #movement keys#
+        self.listenKeyEvent('keydown', 'right arrow', self.R)
+        self.listenKeyEvent('keydown', 'left arrow', self.L)
+        self.listenKeyEvent('keydown', 'up arrow', self.U)
+        self.listenKeyEvent('keydown', 'down arrow', self.D)
+        ##
         self.car = None
-
+#Movement keys#
+    def R(self, event):
+        self.frog.x += 20
+    def L(self, event):
+        self.frog.x -= 20
+    def U(self, event):
+        self.frog.y -= 20
+    def D(self, event):
+        self.frog.y += 20
+    
+    
     def buildCar (self, event):
         self.carsprite = Car(0, 400)
     
     def go(self, event):
         Road(0,300)
         Water(0,50)
-        Frog(400,600)
+        self.frog=Frog(400,600)
         self.car=Car(0,400)
         
     def step(self):
@@ -63,6 +80,9 @@ class Frogger(App):
             self.car.x += 1
             if self.car.x == 780:
                 self.car.x = 1
+            cardeath = self.frog.collidingWithSprites(Car)
+            if cardeath:
+                reset
             
 
 
