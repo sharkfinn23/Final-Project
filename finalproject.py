@@ -20,7 +20,6 @@ class Road(Sprite):
         super().__init__(Road.road, (x, y))
         self.x = x
         self.y = y
-        
 class Water(Sprite):
     water = RectangleAsset(800, 250, thinline, blue)
     def __init__(self, x, y):
@@ -28,7 +27,13 @@ class Water(Sprite):
         self.x = x
         self.y = y
 
-
+class Car(Sprite):
+    car = RectangleAsset(20, 20, thinline, green)
+    def __init__(self, x, y):
+        super().__init__(Car.car, (x, y))
+        self.x = x
+        self.y = y
+        
 class Frog(Sprite):
     frog = RectangleAsset(15, 15, thinline, red)
     def __init__(self, x, y):
@@ -47,6 +52,8 @@ class Frogger(App):
         Road(0,300)
         Water(0,50)
         Frog(400,600)
-        
+        Car(0,400)
+    def step(self):
+        pass
 myapp = Frogger(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.run()
