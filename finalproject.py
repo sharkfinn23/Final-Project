@@ -95,10 +95,15 @@ class Frogger(App):
         self.car.destroy()
         self.frog.destroy()
         self.log.destroy()
-        if lives < 0:
-            self.end()
-        self.go()
-        
+        self.go2()
+    
+    def go2(self):
+        self.road=Road(0,300)
+        self.water=Water(0,50)
+        self.frog=Frog(400,600)
+        self.car=Car(0,400)
+        self.log=Log(0,250)
+
     def step(self):
         global carspeed
         global logspeed
@@ -110,7 +115,11 @@ class Frogger(App):
                 self.car.x = 1
             cardeath = self.frog.collidingWithSprites(Car)
             if cardeath:
+                print('a')
                 self.reset()
+                print('a')
+                
+                
             
 
     
