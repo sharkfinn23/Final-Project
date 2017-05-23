@@ -12,7 +12,7 @@ thinline = LineStyle(2, black)
 
 #randoms
 loglength = random.randint(2,10)
-carspeed = random.randint(0,15)/10
+carspeed = random.randint(5,15)/10
 
 black = Color(0, 1)
 bg_asset = RectangleAsset(SCREEN_WIDTH, SCREEN_HEIGHT, thinline, green)
@@ -41,7 +41,7 @@ class Car(Sprite):
 
 class Log(Sprite):
     global loglength
-    log = RectangleAsset(20, 20*loglength, thinline, brown)
+    log = RectangleAsset(20*loglength, 20, thinline, brown)
     def __init__(self, x, y):
         super().__init__(Log.log, (x, y))
         self.x = x
@@ -85,7 +85,7 @@ class Frogger(App):
         self.water=Water(0,50)
         self.frog=Frog(400,600)
         self.car=Car(0,400)
-        self.log=Log(0,250)
+        self.log=Log(0,280)
 
     #reset game#
     def reset(self):
@@ -115,9 +115,16 @@ class Frogger(App):
                 self.car.x = 1
             cardeath = self.frog.collidingWithSprites(Car)
             if cardeath:
-                print('a')
                 self.reset()
-                print('a')
+        if self.log:
+            if self.log.x > 780 - 20*loglength:
+                self.log.x = 1
+            waterstuff = self.frog.collidingWithSprites(Water)
+            notlog = 0
+            if self.frog.collidingWithSprites(Log) == True:
+                notlog = 1
+            if waterstuff and notlog == 1:
+                self.reset()
                 
                 
             
