@@ -40,6 +40,7 @@ class Car(Sprite):
         self.y = y
 
 class Log(Sprite):
+    global loglength
     log = RectangleAsset(20, 20*loglength, thinline, brown)
     def __init__(self, x, y):
         super().__init__(Log.log, (x, y))
@@ -85,11 +86,6 @@ class Frogger(App):
         self.frog=Frog(400,600)
         self.car=Car(0,400)
         self.log=Log(0,250)
-    
-    #restart without road and water again#
-    
-    def end(self):
-        print(x)
 
     #reset game#
     def reset(self):
@@ -103,30 +99,20 @@ class Frogger(App):
             self.end()
         self.go()
         
-        
-        
     def step(self):
+        global carspeed
+        global logspeed
+        global loglength
         #makes car move#
         if self.car:
             self.car.x += carspeed
             if self.car.x > 780:
                 self.car.x = 1
-        if self.log:
-            self.log.x += logspeed
-            if self.log.x > 780-loglegth*20:
-                self.log.x = 1
-            #testing for impact with car#
             cardeath = self.frog.collidingWithSprites(Car)
             if cardeath:
                 self.reset()
-            if self.log == True:
-                if self.frog.collidingWithSprites(Water) == True and self.frog.collidingWithSprites(Log) == False:
-                    self.reset()
-            else:
-                if self.frog.collidingWithSprites(Water):
-                    self.reset()
+            
 
-                
     
             
 
