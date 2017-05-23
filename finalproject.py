@@ -1,5 +1,5 @@
 from ggame import App, Color, LineStyle, Sprite, RectangleAsset, CircleAsset, EllipseAsset, PolygonAsset, ImageAsset, Frame
-
+import random
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
@@ -7,8 +7,12 @@ black = Color(0x000000, 1.0)
 green = Color(0x00ff00, 1.0)
 blue = Color(0x0000ff, 1.0)
 red = Color(0xff0000, 1.0)
+brown = Color(0xD2691E, 1.0)
 thinline = LineStyle(2, black)
 
+#randoms
+loglength = random.randint(2,10)
+carspeed = random.randint(0,15)/10
 
 black = Color(0, 1)
 bg_asset = RectangleAsset(SCREEN_WIDTH, SCREEN_HEIGHT, thinline, green)
@@ -35,6 +39,14 @@ class Car(Sprite):
         self.x = x
         self.y = y
 
+class Log(Sprite):
+    log = RectangleAsset(20, 20*loglength, thinline, brown)
+    def __init__(self, x, y):
+        super().__init__(Log.log, (x, y))
+        self.x = x
+        self.y = y
+
+
         
 class Frog(Sprite):
     frog = RectangleAsset(15, 15, thinline, red)
@@ -55,6 +67,7 @@ class Frogger(App):
         self.listenKeyEvent('keydown', 'down arrow', self.D)
         #start with no car#
         self.car = None
+        self.log = None
 #Movement keys#
     def R(self, event):
         self.frog.x += 20
@@ -71,12 +84,9 @@ class Frogger(App):
         self.water=Water(0,50)
         self.frog=Frog(400,600)
         self.car=Car(0,400)
-        print('a')
+        self.log=Log(0,250)
     
     #restart without road and water again#
-    def go2(self):
-        self.frog=Frog(400,600)
-        self.car=Car(0,400)
     
     def end(self):
         print(x)
@@ -88,22 +98,33 @@ class Frogger(App):
         lives = lives -1 
         self.car.destroy()
         self.frog.destroy()
+        self.log.destroy()
         if lives < 0:
             self.end()
-        self.go2()
+        self.go()
         
         
         
     def step(self):
         #makes car move#
         if self.car:
-            self.car.x += 1
-            if self.car.x == 780:
+            self.car.x += carspeed
+            if self.car.x > 780:
                 self.car.x = 1
+        if self.log:
+            self.log.x += logspeed
+            if self.log.x > 780-loglegth*20:
+                self.log.x = 1
             #testing for impact with car#
             cardeath = self.frog.collidingWithSprites(Car)
             if cardeath:
                 self.reset()
+            if self.log == True:
+                if self.frog.collidingWithSprites(Water) == True and self.frog.collidingWithSprites(Log) == False:
+                    self.reset()
+            else:
+                if self.frog.collidingWithSprites(Water):
+                    self.reset()
 
                 
     
