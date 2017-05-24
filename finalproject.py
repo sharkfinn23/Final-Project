@@ -44,7 +44,7 @@ class Car(Sprite):
 
 class Log(Sprite):
     global loglength
-    log = RectangleAsset(20*loglength, 19, thinline, brown)
+    log = RectangleAsset(40*loglength, 30, thinline, brown)
     def __init__(self, x, y):
         super().__init__(Log.log, (x, y))
         self.x = x
@@ -53,7 +53,7 @@ class Log(Sprite):
 
         
 class Frog(Sprite):
-    frog = RectangleAsset(20, 20, thinline, red)
+    frog = RectangleAsset(40, 40, thinline, red)
     def __init__(self, x, y):
         super().__init__(Frog.frog, (x, y))
         self.x = x
@@ -74,13 +74,13 @@ class Frogger(App):
         self.log = None
 #Movement keys#
     def R(self, event):
-        self.frog.x += 20
+        self.frog.x += 40
     def L(self, event):
-        self.frog.x -= 20
+        self.frog.x -= 40
     def U(self, event):
-        self.frog.y -= 20
+        self.frog.y -= 40
     def D(self, event):
-        self.frog.y += 20
+        self.frog.y += 40
     
    #start game# 
     def go(self, event):
@@ -120,11 +120,16 @@ class Frogger(App):
             if cardeath:
                 self.reset()
         if self.log:
+            global loglength
+            global logspeed
+            self.log.x += logspeed
+            if self.log.x > 780 - 40*loglength:
+                self.log.x = 1
             watercollide = self.frog.collidingWithSprites(Water)
             logcollide = self.frog.collidingWithSprites(Log)
             if watercollide:
                 if logcollide:
-                    pass
+                    self.frog.x += logspeed
                 else:
                     self.reset()
             if self.log.x > 780 - 20*loglength:
