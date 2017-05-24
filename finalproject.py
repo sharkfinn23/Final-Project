@@ -12,6 +12,8 @@ thinline = LineStyle(2, black)
 
 #randoms
 loglength = random.randint(2,10)
+logspeed = random.randint(5,25)/10
+carlength = random.randint(1,3)
 carspeed = random.randint(5,15)/10
 
 black = Color(0, 1)
@@ -33,7 +35,8 @@ class Water(Sprite):
         self.y = y
 
 class Car(Sprite):
-    car = RectangleAsset(20, 20, thinline, green)
+    global carlength
+    car = RectangleAsset(40 * carlength, 40, thinline, green)
     def __init__(self, x, y):
         super().__init__(Car.car, (x, y))
         self.x = x
@@ -41,7 +44,7 @@ class Car(Sprite):
 
 class Log(Sprite):
     global loglength
-    log = RectangleAsset(20*loglength, 20, thinline, brown)
+    log = RectangleAsset(20*loglength, 19, thinline, brown)
     def __init__(self, x, y):
         super().__init__(Log.log, (x, y))
         self.x = x
@@ -50,7 +53,7 @@ class Log(Sprite):
 
         
 class Frog(Sprite):
-    frog = RectangleAsset(15, 15, thinline, red)
+    frog = RectangleAsset(20, 20, thinline, red)
     def __init__(self, x, y):
         super().__init__(Frog.frog, (x, y))
         self.x = x
@@ -102,7 +105,7 @@ class Frogger(App):
         self.water=Water(0,50)
         self.frog=Frog(400,600)
         self.car=Car(0,400)
-        self.log=Log(0,250)
+        self.log=Log(0,280)
 
     def step(self):
         global carspeed
@@ -117,14 +120,16 @@ class Frogger(App):
             if cardeath:
                 self.reset()
         if self.log:
+            watercollide = self.frog.collidingWithSprites(Water)
+            logcollide = self.frog.collidingWithSprites(Log)
+            if watercollide:
+                if logcollide:
+                    pass
+                else:
+                    self.reset()
             if self.log.x > 780 - 20*loglength:
                 self.log.x = 1
-            waterstuff = self.frog.collidingWithSprites(Water)
-            notlog = 0
-            if self.frog.collidingWithSprites(Log) == True:
-                notlog = 1
-            if waterstuff and notlog == 1:
-                self.reset()
+                
                 
                 
             
