@@ -28,7 +28,7 @@ class Road(Sprite):
         self.y = y
         
 class Water(Sprite):
-    water = RectangleAsset(800, 250, thinline, blue)
+    water = RectangleAsset(800, 235, thinline, blue)
     def __init__(self, x, y):
         super().__init__(Water.water, (x, y))
         self.x = x
@@ -36,7 +36,7 @@ class Water(Sprite):
 
 class Car(Sprite):
     global carlength
-    car = RectangleAsset(40 * carlength, 40, thinline, green)
+    car = RectangleAsset(40 * carlength, 30, thinline, green)
     def __init__(self, x, y):
         super().__init__(Car.car, (x, y))
         self.x = x
@@ -87,8 +87,9 @@ class Frogger(App):
         self.road=Road(0,300)
         self.water=Water(0,50)
         self.frog=Frog(400,600)
-        self.car=Car(0,400)
-        self.log=Log(0,280)
+        self.log=Log(0,285)
+        self.car=Car(0,405)
+        
 
     #reset game#
     def reset(self):
@@ -104,8 +105,9 @@ class Frogger(App):
         self.road=Road(0,300)
         self.water=Water(0,50)
         self.frog=Frog(400,600)
-        self.car=Car(0,400)
-        self.log=Log(0,280)
+        self.log=Log(0,285)
+        self.car=Car(0,405)
+        
 
     def step(self):
         global carspeed
@@ -123,7 +125,7 @@ class Frogger(App):
             global loglength
             global logspeed
             self.log.x += logspeed
-            if self.log.x > 780 - 40*loglength:
+            if self.log.x > 780:
                 self.log.x = 1
             watercollide = self.frog.collidingWithSprites(Water)
             logcollide = self.frog.collidingWithSprites(Log)
