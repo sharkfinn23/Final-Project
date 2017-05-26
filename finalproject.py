@@ -41,13 +41,54 @@ class Car(Sprite):
         self.x = x
         self.y = y
 
-class Log(Sprite):
-    global loglength
-    log = RectangleAsset(40*loglength, 30, thinline, brown)
+class Log1(Sprite):
+    loglength = random.randint(2,10) * 40
+    log = RectangleAsset(loglength, 30, thinline, brown)
     def __init__(self, x, y):
-        super().__init__(Log.log, (x, y))
+        super().__init__(Log1.log, (x, y))
         self.x = x
         self.y = y
+class Log2(Sprite):
+    loglength = random.randint(2,10) * 40
+    log = RectangleAsset(loglength, 30, thinline, brown)
+    def __init__(self, x, y):
+        super().__init__(Log2.log, (x, y))
+        self.x = x
+        self.y = y
+class Log3(Sprite):
+    loglength = random.randint(2,10) * 40
+    log = RectangleAsset(loglength, 30, thinline, brown)
+    def __init__(self, x, y):
+        super().__init__(Log3.log, (x, y))
+        self.x = x
+        self.y = y
+class Log4(Sprite):
+    loglength = random.randint(2,10) * 40
+    log = RectangleAsset(loglength, 30, thinline, brown)
+    def __init__(self, x, y):
+        super().__init__(Log4.log, (x, y))
+        self.x = x
+        self.y = y
+class Log5(Sprite):
+    loglength = random.randint(2,10) * 40
+    log = RectangleAsset(loglength, 30, thinline, brown)
+    def __init__(self, x, y):
+        super().__init__(Log5.log, (x, y))
+        self.x = x
+        self.y = y
+class Log6(Sprite):
+    loglength = random.randint(2,10) * 40
+    log = RectangleAsset(loglength, 30, thinline, brown)
+    def __init__(self, x, y):
+        super().__init__(Log6.log, (x, y))
+        self.x = x
+        self.y = y
+
+
+
+
+
+
 
 
         
@@ -71,6 +112,12 @@ class Frogger(App):
         #start with no car#
         self.car = None
         self.log1 = None
+        self.log2 = None
+        self.log3 = None
+        self.log4 = None
+        self.log5 = None
+        self.log6 = None
+        
 #Movement keys#
     def R(self, event):
         self.frog.x += 40
@@ -83,11 +130,18 @@ class Frogger(App):
     
    #start game# 
     def go(self, event):
+        
         self.road=Road(0,300)
         self.water=Water(0,50)
         self.frog=Frog(400,600)
-        self.log1=Log(0,285)
+        self.log1=Log1(0,285)
+        self.log2=Log2(800,245)
+        self.log3=Log3(0,205)
+        self.log4=Log4(800,165)
+        self.log5=Log5(0,125)
+        self.log6=Log6(800,85)
         self.car=Car(0,405)
+    
         
 
     #reset game#
@@ -104,15 +158,16 @@ class Frogger(App):
         self.road=Road(0,300)
         self.water=Water(0,50)
         self.frog=Frog(400,600)
-        self.log1=Log(0,285)
+        self.log1=Log1(0,285)
+        self.log2=Log2(0,245)
+        self.log3=Log3(0,205)
+        self.log4=Log4(0,165)
+        self.log5=Log5(0,125)
+        self.log6=Log6(0,85)
         self.car=Car(0,405)
         
 
     def step(self):
-        global carspeed
-        global logspeed
-        global loglength
-        logspeed1 = random.randint(5,40)/10
         #makes car move#
         if self.car:
             self.car.x += carspeed
@@ -122,18 +177,35 @@ class Frogger(App):
             if cardeath:
                 self.reset()
         if self.log1:
-            self.log1.x += logspeed1
+            logspeed = random.randint(15,30)/10
+            self.log1.x += logspeed
             if self.log1.x > 780:
                 self.log1.x = 1
             watercollide = self.frog.collidingWithSprites(Water)
-            logcollide = self.frog.collidingWithSprites(Log)
+            logcollide = self.frog.collidingWithSprites(Log1)
             if watercollide:
                 if logcollide:
                     self.frog.x += logspeed1
                 else:
                     self.reset()
-            if self.log1.x > 780 - 20*loglength:
+            if self.log1.x > 780:
                 self.log1.x = 1
+                
+        if self.log2:
+            logspeed = -1 * random.randint(15, 30)/10
+            self.log2.x += logspeed
+            if self.log2.x < 0:
+                self.log2.x = 800
+            watercollide = self.frog.collidingWithSprites(Water)
+            logcollide = self.frog.collidingWithSprites(Log2)
+            if watercollide:
+                print('a')
+                if logcollide:
+                    self.frog.x += logspeed
+                else:
+                    self.reset()
+            if self.log2.x < 0:
+                self.log2.x = 800
                 
                 
                 
