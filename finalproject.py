@@ -135,7 +135,6 @@ class Frogger(App):
     
    #start game# 
     def go(self, event):
-        
         self.road=Road(0,300)
         self.water=Water(0,50)
         self.frog=Frog(400,600)
@@ -196,7 +195,7 @@ class Frogger(App):
             logcollide = self.frog.collidingWithSprites(Log1) or self.frog.collidingWithSprites(Log2) or self.frog.collidingWithSprites(Log3) or self.frog.collidingWithSprites(Log4) or self.frog.collidingWithSprites(Log5) or self.frog.collidingWithSprites(Log6)
             if watercollide:
                 if logcollide:
-                    self.frog.x += logspeed1
+                    self.frog.x += logspeed
                 else:
                     self.reset()
             if self.log1.x > 780:
@@ -210,7 +209,6 @@ class Frogger(App):
             watercollide = self.frog.collidingWithSprites(Water)
             logcollide = self.frog.collidingWithSprites(Log1) or self.frog.collidingWithSprites(Log2) or self.frog.collidingWithSprites(Log3) or self.frog.collidingWithSprites(Log4) or self.frog.collidingWithSprites(Log5) or self.frog.collidingWithSprites(Log6)
             if watercollide:
-                print('a')
                 if logcollide:
                     self.frog.x += logspeed
                 else:
