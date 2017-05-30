@@ -83,6 +83,13 @@ class Log6(Sprite):
         super().__init__(Log6.log, (x, y))
         self.x = x
         self.y = y
+class Log7(Sprite):
+    loglength = random.randint(2,10) * 40
+    log = RectangleAsset(loglength, 30, thinline, brown)
+    def __init__(self, x, y):
+        super().__init__(Log7.log, (x, y))
+        self.x = x
+        self.y = y
 class White(Sprite):
     white = RectangleAsset(400, 600, whiteline, white)
     def __init__(self, x, y):
@@ -138,12 +145,13 @@ class Frogger(App):
         self.road=Road(0,300)
         self.water=Water(0,50)
         self.frog=Frog(400,600)
-        self.log1=Log1(0,285)
-        self.log2=Log2(800,245)
-        self.log3=Log3(0,205)
-        self.log4=Log4(800,165)
-        self.log5=Log5(0,125)
-        self.log6=Log6(800,85)
+        self.log1=Log1(random.randint(0,800),285)
+        self.log2=Log2(random.randint(0,800),245)
+        self.log3=Log3(random.randint(0,800),205)
+        self.log4=Log4(random.randint(0,800),165)
+        self.log5=Log5(random.randint(0,800),125)
+        self.log6=Log6(random.randint(0,800),85)
+        self.log7=Log7(random.randint(0,800),45)
         self.car=Car(0,405)
         self.white=White(800,0)
         
