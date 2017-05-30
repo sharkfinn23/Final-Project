@@ -3,13 +3,14 @@ import random
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
+white = Color (0xfffff, 1.0)
 black = Color(0x000000, 1.0)
 green = Color(0x00ff00, 1.0)
 blue = Color(0x0000ff, 1.0)
 red = Color(0xff0000, 1.0)
 brown = Color(0xD2691E, 1.0)
 thinline = LineStyle(2, black)
-
+whiteline = LineStyle(2, white)
 #randoms
 loglength = random.randint(2,10)
 carlength = random.randint(1,3)
@@ -83,7 +84,12 @@ class Log6(Sprite):
         super().__init__(Log6.log, (x, y))
         self.x = x
         self.y = y
-
+class White(Sprite):
+    white = RectangleAsset(400, 600, whiteline, brown)
+    def __init__(self, x, y):
+        super().__init__(Log6.log, (x, y))
+        self.x = x
+        self.y = y
 
 
 
@@ -141,17 +147,22 @@ class Frogger(App):
         self.log5=Log5(0,125)
         self.log6=Log6(800,85)
         self.car=Car(0,405)
-    
+        self.white=White(800,0)
         
 
     #reset game#
     def reset(self):
-        #life decrease#
-        global lives
-        lives = lives -1 
-        self.car.destroy()
+        self.road.destroy()
+        self.water.destroy()
         self.frog.destroy()
         self.log1.destroy()
+        self.log2.destroy()
+        self.log3.destroy()
+        self.log4.destroy()
+        self.log5.destroy()
+        self.log6.destroy()
+        self.car.destroy()
+        self.white.destroy()
         self.go2()
     
     def go2(self):
@@ -165,6 +176,7 @@ class Frogger(App):
         self.log5=Log5(0,125)
         self.log6=Log6(0,85)
         self.car=Car(0,405)
+        self.white
         
 
     def step(self):
