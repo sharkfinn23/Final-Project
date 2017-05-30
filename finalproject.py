@@ -188,35 +188,36 @@ class Frogger(App):
                 self.reset()
         if self.log1:
             logspeed = random.randint(15,30)/10
+            log1collide = self.frog.collidingWithSprites(Log1)
+            logcollide = self.frog.collidingWithSprites(Log1) or self.frog.collidingWithSprites(Log2) or self.frog.collidingWithSprites(Log3) or self.frog.collidingWithSprites(Log4) or self.frog.collidingWithSprites(Log5) or self.frog.collidingWithSprites(Log6)
+            watercollide = self.frog.collidingWithSprites(Water)
             self.log1.x += logspeed
             if self.log1.x > 780:
                 self.log1.x = 1
-            watercollide = self.frog.collidingWithSprites(Water)
-            if self.frog.collidingWithSprites(Log1) == True:
-                logcollide = self.frog.collidingWithSprites(Log1) or self.frog.collidingWithSprites(Log2) or self.frog.collidingWithSprites(Log3) or self.frog.collidingWithSprites(Log4) or self.frog.collidingWithSprites(Log5) or self.frog.collidingWithSprites(Log6)
-                if watercollide:
-                    if logcollide:
-                        self.frog.x += logspeed
-                    else:
-                        self.reset()
-            if self.log1.x > 780:
-                self.log1.x = 1
+            if watercollide:
+                if log1collide:
+                    self.frog.x += logspeed
+                if logcollide:
+                    pass
+                else:
+                    self.reset()
+
                 
         if self.log2:
-            logspeed2 = -1 * random.randint(15, 30)/10
+            logspeed = -1*random.randint(15,30)/10
+            log2collide = self.frog.collidingWithSprites(Log2)
+            logcollide = self.frog.collidingWithSprites(Log1) or self.frog.collidingWithSprites(Log2) or self.frog.collidingWithSprites(Log3) or self.frog.collidingWithSprites(Log4) or self.frog.collidingWithSprites(Log5) or self.frog.collidingWithSprites(Log6)
+            watercollide = self.frog.collidingWithSprites(Water)
             self.log2.x += logspeed
             if self.log2.x < 0:
-                self.log2.x = 800
-            watercollide = self.frog.collidingWithSprites(Water)
-            logcollide = self.frog.collidingWithSprites(Log1) or self.frog.collidingWithSprites(Log2) or self.frog.collidingWithSprites(Log3) or self.frog.collidingWithSprites(Log4) or self.frog.collidingWithSprites(Log5) or self.frog.collidingWithSprites(Log6)
-            if self.frog.collidingWithSprites(Log2) == True:
-                if watercollide:
-                    if logcollide:
-                        self.frog.x += logspeed2
-                    else:
-                        self.reset()
-            if self.log2.x < 0:
-                self.log2.x = 800
+                self.log2.x = 1
+            if watercollide:
+                if log2collide:
+                    self.frog.x += logspeed
+                if logcollide:
+                    pass
+                else:
+                    self.reset()
                 
                 
                 
