@@ -3,7 +3,7 @@ import random
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-white = Color (0xfffff, 1.0)
+white = Color (0xffffff, 1.0)
 black = Color(0x000000, 1.0)
 green = Color(0x00ff00, 1.0)
 blue = Color(0x0000ff, 1.0)
@@ -19,7 +19,6 @@ carspeed = random.randint(5,15)/10
 black = Color(0, 1)
 bg_asset = RectangleAsset(SCREEN_WIDTH, SCREEN_HEIGHT, thinline, green)
 bg = Sprite(bg_asset, (0,0))
-lives = 3
 class Road(Sprite):
     road = RectangleAsset(800, 250, thinline, black)
     def __init__(self, x, y):
@@ -85,9 +84,9 @@ class Log6(Sprite):
         self.x = x
         self.y = y
 class White(Sprite):
-    white = RectangleAsset(400, 600, whiteline, brown)
+    white = RectangleAsset(400, 600, whiteline, white)
     def __init__(self, x, y):
-        super().__init__(Log6.log, (x, y))
+        super().__init__(White.white, (x, y))
         self.x = x
         self.y = y
 
@@ -194,7 +193,7 @@ class Frogger(App):
             if self.log1.x > 780:
                 self.log1.x = 1
             watercollide = self.frog.collidingWithSprites(Water)
-            logcollide = self.frog.collidingWithSprites(Log1)
+            logcollide = self.frog.collidingWithSprites(Log1) or self.frog.collidingWithSprites(Log2) or self.frog.collidingWithSprites(Log3) or self.frog.collidingWithSprites(Log4) or self.frog.collidingWithSprites(Log5) or self.frog.collidingWithSprites(Log6)
             if watercollide:
                 if logcollide:
                     self.frog.x += logspeed1
@@ -209,7 +208,7 @@ class Frogger(App):
             if self.log2.x < 0:
                 self.log2.x = 800
             watercollide = self.frog.collidingWithSprites(Water)
-            logcollide = self.frog.collidingWithSprites(Log2)
+            logcollide = self.frog.collidingWithSprites(Log1) or self.frog.collidingWithSprites(Log2) or self.frog.collidingWithSprites(Log3) or self.frog.collidingWithSprites(Log4) or self.frog.collidingWithSprites(Log5) or self.frog.collidingWithSprites(Log6)
             if watercollide:
                 print('a')
                 if logcollide:
