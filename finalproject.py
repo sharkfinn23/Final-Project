@@ -188,13 +188,13 @@ class Frogger(App):
                 self.reset()
         if self.log1:
             logspeed = random.randint(15,30)/10
+            neglogspeed = -1*logspeed
             log1collide = self.frog.collidingWithSprites(Log1)
             logcollide = self.frog.collidingWithSprites(Log1) or self.frog.collidingWithSprites(Log2) or self.frog.collidingWithSprites(Log3) or self.frog.collidingWithSprites(Log4) or self.frog.collidingWithSprites(Log5) or self.frog.collidingWithSprites(Log6)
             watercollide = self.frog.collidingWithSprites(Water)
             self.log1.x += logspeed
             if self.log1.x > 780:
-                logspeed
-                self.log1.x = 1
+                logspeed = neglogspeed
             if watercollide:
                 if log1collide:
                     self.frog.x += logspeed
