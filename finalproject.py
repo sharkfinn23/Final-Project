@@ -163,7 +163,7 @@ class Frogger(App):
         self.car4=Car(random.randint(0,800), 445)
         self.car5=Car(random.randint(0,800), 485)
         self.car6=Car(random.randint(0,800), 525)
-        self.car7=Car(random.randint(0,800), 565)
+        
         
         
         self.white=White(800,0)
