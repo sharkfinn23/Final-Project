@@ -12,9 +12,8 @@ brown = Color(0xD2691E, 1.0)
 thinline = LineStyle(2, black)
 whiteline = LineStyle(2, white)
 #randoms
-loglength = random.randint(2,10)
-carlength = random.randint(1,3)
-carspeed = random.randint(5,15)/10
+carlength = random.randint(3,6)/2
+carspeed = random.randint(40,75)/10
 
 black = Color(0, 1)
 bg_asset = RectangleAsset(SCREEN_WIDTH, SCREEN_HEIGHT, thinline, green)
@@ -164,7 +163,7 @@ class Frogger(App):
         self.car4=Car(random.randint(0,800), 445)
         self.car5=Car(random.randint(0,800), 485)
         self.car6=Car(random.randint(0,800), 525)
-        self.car4=Car(random.randint(0,800), 565)
+        self.car7=Car(random.randint(0,800), 565)
         
         
         self.white=White(800,0)
@@ -201,6 +200,56 @@ class Frogger(App):
                 self.reset()
             if whitedeath:
                 self.reset()
+        if self.car3:
+            self.car3.x -= carspeed
+            if self.car3.x < 0:
+                self.car3.x = 800
+            whitedeath = self.frog.collidingWithSprites(White)
+            cardeath = self.frog.collidingWithSprites(Car)
+            if cardeath:
+                self.reset()
+            if whitedeath:
+                self.reset()
+        if self.car4:
+            self.car4.x += carspeed
+            if self.car4.x > 780:
+                self.car4.x = 1
+            whitedeath = self.frog.collidingWithSprites(White)
+            cardeath = self.frog.collidingWithSprites(Car)
+            if cardeath:
+                self.reset()
+            if whitedeath:
+                self.reset()
+        if self.car5:
+            self.car5.x -= carspeed
+            if self.car5.x < 0:
+                self.car5.x = 800
+            whitedeath = self.frog.collidingWithSprites(White)
+            cardeath = self.frog.collidingWithSprites(Car)
+            if cardeath:
+                self.reset()
+            if whitedeath:
+                self.reset()
+        if self.car6:
+            self.car6.x += carspeed
+            if self.car6.x > 780:
+                self.car6.x = 1
+            whitedeath = self.frog.collidingWithSprites(White)
+            cardeath = self.frog.collidingWithSprites(Car)
+            if cardeath:
+                self.reset()
+            if whitedeath:
+                self.reset()
+        if self.car7:
+            self.car7.x -= carspeed
+            if self.car7.x < 0:
+                self.car7.x = 800
+            whitedeath = self.frog.collidingWithSprites(White)
+            cardeath = self.frog.collidingWithSprites(Car)
+            if cardeath:
+                self.reset()
+            if whitedeath:
+                self.reset() 
         if self.log1:
             logspeed = random.randint(15,30)/10
             neglogspeed = -1*logspeed
